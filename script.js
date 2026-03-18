@@ -2,14 +2,27 @@ const start = new Date('1975-04-05T00:00:00+02:00');
 
 function update() {
     const now = new Date();
-    let diff = now.getTime() - start.getTime();
 
-    const secondiTotali = Math.floor(diff / 1000);
+    let anni = now.getFullYear() - start.getFullYear();
+    let mesi = now.getMonth() - start.getMonth();
+    let giorni = now.getDate() - start.getDate();
+    let ore = now.getHours() - start.getHours();
 
-    const anni = Math.floor(secondiTotali / (365.25 * 86400));
-    const mesi = Math.floor((secondiTotali % (365.25 * 86400)) / (30.44 * 86400));
-    const giorni = Math.floor((secondiTotali % (30.44 * 86400)) / 86400);
-    const ore = Math.floor((secondiTotali % 86400) / 3600);
+    if (ore < 0) {
+        ore += 24;
+        giorni--;
+    }
+
+    if (giorni < 0) {
+        const mesePrec = new Date(now.getFullYear(), now.getMonth(), 0).getDate();
+        giorni += mesePrec;
+        mesi--;
+    }
+
+    if (mesi < 0) {
+        mesi += 12;
+        anni--;
+    }
 
     document.getElementById('anni').textContent = anni;
     document.getElementById('mesi').textContent = mesi;
