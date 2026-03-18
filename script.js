@@ -1,4 +1,4 @@
-const start = new Date('1975-04-05T00:00:00+02:00');
+const start = new Date('1975-04-05T00:00:00');
 
 function update() {
     const now = new Date();
